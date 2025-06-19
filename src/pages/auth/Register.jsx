@@ -7,12 +7,13 @@ import axios from 'axios'
 
 function Register() {
 
-  const {handleSubmit, register} = useForm()
+  const {handleSubmit, register, formState} = useForm();
+  const {isSubmitting} = formState
 
 
 
   const hdlSubmit = async (value) => {
-
+    await new Promise((resolve)=>setTimeout(resolve, 2000))
   
     try {
       const res = await axios.post('http://localhost:8000/auth/register',value)
@@ -45,7 +46,7 @@ function Register() {
               className="bg-pink-700 text-white p-2 
             rounded-md"
             >
-              Register
+              {isSubmitting ? "Loading" : "Register"}
             </button>
           </div>
         </form>
